@@ -57,7 +57,7 @@ function clicked_description_show_location(e){
 	var bounds = new L.LatLngBounds();
 	bounds.extend(ngoMarkers[index].getLatLng());
 	map.fitBounds(bounds);
-	ngoMarkers[i].openPopup();
+	ngoMarkers[index].openPopup();
 }
 /**
  * Click handler cannot be attached if the popup is not opened, i.e. not visible
