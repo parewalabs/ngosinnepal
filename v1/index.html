@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NGOs in Nepal</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/components.css">
+	<link rel="stylesheet" href="css/map.css">
+	<link rel="stylesheet" href="css/tabletop.css">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="https://goo.gl/HV6IYp" target="_blank" class="navbar-toggle collapsed btn add-ngo">Add your NGO here</a>
+					<a class="navbar-brand" href="#">NGOs in Nepal</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<div class="navbar-form navbar-right" role="button">
+						<a href="https://goo.gl/HV6IYp" target="_blank" class="btn add-ngo">Add your NGO here</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div id="map-canvas"></div>
+	<div id="tabletop-wrapper" class="container-fluid">
+		<div class="row" id="tabletop-output">
+			<div class="loading">Loading data ...</div>
+		</div>
+	</div>
+	<footer></footer>
+
+	<!-- Templates -->
+	<div class="template" id="tpl-col">
+		<div class="col-sm-6 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">{Name}</div>
+				<div class="panel-body">
+					<p>{Tagline}</p>
+				</div>
+				<div class="panel-footer">
+					<p class="field-Website {field-Website}"><i class="fa fa-fw fa-globe"></i> <a href="{Website}">Visit website</a></p>
+					<p class="field-Phone_Number {field-Phone_Number}"><i class="fa fa-fw fa-phone"></i> <a href="tel:{Phone Number}">{Phone Number}</a></p>
+					<p class="field-Email {field-Email}"><i class="fa fa-fw fa-envelope"></i> {Email}</p>
+					<p class="field-Link_to_facebook_page {field-Link_to_facebook_page}"><i class="fa fa-fw fa-facebook"></i> <a href="{Link to facebook page}">Facebook page</a></p>
+					<p class="field-Link_to_twitter_account {field-Link_to_twitter_account}"><i class="fa fa-fw fa-twitter"></i> <a href="{Link to twitter account}">Twitter feed</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<script type="text/javascript" src="js/vendor/leaflet.sleep.js"></script>
+	<script type="text/javascript" src="js/vendor/leaflet.markercluster.js"></script>
+	<script type="text/javascript" src="js/vendor/tabletop.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript" src="js/tabletop.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
