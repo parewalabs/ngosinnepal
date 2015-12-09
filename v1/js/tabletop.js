@@ -17,7 +17,7 @@ function showInfo(tabletopData, tabletopInfo, next) {
 		// Create map markers. They will be appended to the map later.
 		var popupHtml = popupTemplate;
 		popupHtml = popupHtml.replace(new RegExp("{Name}", "g"), item["Name"]);
-		popupHtml = popupHtml.replace(new RegExp("{field-index}", "g"), j);
+		popupHtml = popupHtml.replace(new RegExp("{index}", "g"), j);
 		if (typeof item["Latitude"] !== undefined && typeof item["Longitude"] !== undefined){
 			ngoMarkers[j] = L.marker([item["Latitude"], item["Longitude"]]).bindPopup(popupHtml);
 			ngoMarkers[j].on("popupopen", popup_opened);
@@ -25,23 +25,35 @@ function showInfo(tabletopData, tabletopInfo, next) {
 		
 		// Append html
 		var data = dataTemplate;
-		var regexp, underscored_field;
-		data = data.replace(new RegExp("{field-index}", "g"), j);
+		var regexp, classField;
+		data = data.replace(new RegExp("{index}", "g"), j);
 		for (var i = keys.length - 1; i >= 0; i--) {
 			if (item[keys[i]] === ""){
-				underscored_field = keys[i].replace(/ /g, "_");
-				regexp = "{field-"+underscored_field+"}";
+				// If data empty -> hide corresponding element by setting its class to 'hidden'
+				classField = keys[i].replace(/ /g, "_");
+				regexp = "{class-"+classField+"}";
 				data = data.replace(new RegExp(regexp, "g"), "hidden");
 			} else {
 				regexp = "{"+keys[i]+"}";
-				data = data.replace(new RegExp(regexp, "g"), item[keys[i]]);
+				var replaceBy = "";
+				if (keys[i] !== "Causes"){
+					replaceBy = item[keys[i]];
+				} else {
+					var items = item[keys[i]].split(',');
+					items.forEach(function (item){
+						var str = item.trim();
+						if (str == "") return;
+						replaceBy = replaceBy + '<span class="cause">'+str.trim()+'</span>';
+					});
+				}
+				data = data.replace(new RegExp(regexp, "g"), replaceBy);
 			}
 		};
 		$sink.append(data);
 	});
 
 	// Add click handler to show location
-	$('.field-Show_on_map').click(clicked_description_show_location);
+	$('.class-Show_on_map').click(clicked_description_show_location);
 
 	next();
 }
