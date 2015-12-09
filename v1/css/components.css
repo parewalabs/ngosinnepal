@@ -1,5 +1,6 @@
 body{
 	font-family: sans-serif;
+	padding-top: 51px;
 }
 header .navbar{
 	margin-bottom: 0;
@@ -11,4 +12,7 @@ header .add-ngo{
 }
 header .add-ngo:hover{
 	background-color: #ddd;
+}
+.template{
+	display: none;
 }

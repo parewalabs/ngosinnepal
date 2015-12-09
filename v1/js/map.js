@@ -1,3 +1,4 @@
+var map;
 function initMap(){
 	var $mapCanvas = $('#map-canvas');
 	var map_height = 400; // $(window).height() - $('.navbar').height();
@@ -8,7 +9,7 @@ function initMap(){
 		attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
 		maxZoom: 18,
 	});
-	var map = new L.map($mapCanvas[0], {
+	map = new L.map($mapCanvas[0], {
 		layers: [basemap]
 	});
 	map.setView([27.700769, 85.300140], 10); // Center over Kathmandu, with a certain zoom level
