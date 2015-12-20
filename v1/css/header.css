@@ -1,6 +1,11 @@
 header .navbar{
 	margin-bottom: 0;
 }
+header .navbar .filter .navbar-text{
+	font-size: 1.2em;
+	color: #5cb85c;
+	cursor: pointer;
+}
 header .navbar-brand h1{
 	margin: 0;
 	font-family: "Crete Round", sans-serif;
@@ -25,4 +30,21 @@ header .add-ngo:hover{
 }
 .headroom--unpinned {
 	transform: translateY(-100%);
+}
+
+@media only screen and (min-width: 320px){
+	header .navbar .container-fluid{
+		padding: 0 5px;
+	}
+	header .navbar .mobile{
+		display: none;
+	}
+}
+@media only screen and (min-width: 480px){
+	header .navbar .container-fluid{
+		padding: 0 15px;
+	}
+	header .navbar .mobile{
+		display: inline;
+	}
 }

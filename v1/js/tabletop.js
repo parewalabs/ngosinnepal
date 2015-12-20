@@ -60,8 +60,6 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	$('.class-Show_on_map').click(clicked_description_show_location);
 
 	/* FILTERING */
-	var $sinkFilterAvailable = $('#filter-select .filter-output');
-	var $sinkFilterSelected = $('#filter-selected .filter-output');
 	var filterTemplate = $('#tpl-filter').html();
 	var filterHtml = "";
 	// Return unique causes
@@ -70,8 +68,11 @@ function showInfo(tabletopData, tabletopInfo, next) {
 		var item_underscore = item.replace(/ /g, '_');
 		filterHtml = filterHtml + filterTemplate.replace(/{Name}/g, item).replace(/{Name_Underscore}/g, item_underscore);
 	});
-	$sinkFilterSelected.append(filterHtml);
+	$('#filter-selected .filter-output').append(filterHtml);
 	$('.cause-clickable').click(clicked_filter);
+
+	updateFilterView();
+	updateShownNgoNumber();
 
 	next();
 }
@@ -81,11 +82,11 @@ function showInfo(tabletopData, tabletopInfo, next) {
  * 2.	"Active filter"-count (the div of class selected-causes-count) is updated to show how many filters for this particular NGO are active right now.
  * 		When that count reaches 0 (user clicks away all filters), all NGO panels with active filter count == 0 are hidden
  * 		When the count instead changes from 0 to 1, affected panels are shown again.
+ * 3. Update number of currently shown NGOs
  */
 function clicked_filter(e){
 	var $target = $(e.target);
 	var name = $target.attr("data-name");
-	// Also, update active filters count for relevant NGO panels. When that count is 0, that NGO panel will get hidden.
 	if ($target.hasClass("selected")){
 		$target.detach().appendTo("#filter-select .filter-output");
 		$('.class-causes [data-name='+name+']').each(function (i, item){
@@ -101,12 +102,37 @@ function clicked_filter(e){
 			$element.attr("data-count", count + 1);
 		});
 	}
-	// Hide an NGO panel if none of the NGO types are selected in the filters
-	$(".selected-causes-count[data-count=0]").parents(".ngo").hide();
-	// Show an NGO panel if any of the NGO types are selected in the filters
-	$(".selected-causes-count[data-count=1]").parents(".ngo").show();
+
+	$(".selected-causes-count[data-count=0]").parents(".ngo").addClass('hidden');
+	$(".selected-causes-count[data-count=1]").parents(".ngo").removeClass('hidden');
+	updateFilterView();
+	updateShownNgoNumber();
+
 	// Toggle class for the clicked element
 	$target.toggleClass("selected");
+}
+function updateFilterView(){
+	var $filterSelect = $('#filter-select');
+	var $filterSelected = $('#filter-selected');
+	if ($('#filter-select .filter-output').children().length == 0){
+		$filterSelect.addClass('hidden');
+	} else {
+		$filterSelect.removeClass('hidden');
+	}
+	if ($('#filter-selected .filter-output').children().length == 0){
+		$filterSelected.addClass('hidden');
+	} else {
+		$filterSelected.removeClass('hidden');
+	}
+}
+function updateShownNgoNumber(){
+	var numVisibleNgos = $('.ngo').length - $('.ngo.hidden').length - 1; // The 1 is the template
+	$('#filter-wrapper .showing-wrapper .showing-count').text(numVisibleNgos);
+	if (numVisibleNgos == 1){
+		$('#filter-wrapper .showing-wrapper .plural').addClass('hidden');
+	} else {
+		$('#filter-wrapper .showing-wrapper .plural').removeClass('hidden');
+	}
 }
 /**
  * Handles click on "Show on map" link in NGO description.

@@ -1,6 +1,6 @@
 var ngoMarkers = [];
 var NAVBAR_HEIGHT = $('header .navbar').height();
-var MAP_HEIGHT = 400;
+var MAP_HEIGHT = 350;
 $(document).ready(function(){
 	// Get NGO data
 	initTabletop(initMap);

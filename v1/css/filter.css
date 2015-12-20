@@ -3,17 +3,17 @@
 }
 @media only screen and (min-width: 320px){
 	#filter-wrapper{
-		padding: 0 0 20px;
+		padding: 20px 5px;
 	}
 }
 @media only screen and (min-width: 480px){
 	#filter-wrapper{
-		padding: 0 50px 20px;
+		padding: 20px 50px;
 	}
 }
 @media only screen and (min-width: 768px){
 	#filter-wrapper{
-		padding: 0 100px 20px;
+		padding: 20px 100px;
 	}
 }
 span.cause-clickable:hover{

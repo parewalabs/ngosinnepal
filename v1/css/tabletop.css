@@ -2,6 +2,7 @@
 	background-color: #eee;
 }
 #tabletop-wrapper .loading{
+	height: 80%;
 	display: none;
 }
 #tabletop-wrapper .loading:first-child:last-child{

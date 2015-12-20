@@ -19,38 +19,55 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a href="https://goo.gl/HV6IYp" target="_blank" class="navbar-toggle collapsed btn add-ngo">Add your NGO here</a>
+					<a href="https://goo.gl/HV6IYp" target="_blank" class="navbar-toggle collapsed btn add-ngo hidden-xs">Add your NGO here</a>
+					<a href="https://goo.gl/HV6IYp" target="_blank" class="navbar-toggle collapsed btn add-ngo visible-xs-block">Add NGO</a>
 					<a class="navbar-brand" href="#">
 						<h1>NGOs in Nepal<span class="color">.</span></h1>
 					</a>
+					<ul class="nav filter visible-xs-block">
+						<li class="navbar-text">
+							<i class="fa fa-filter"></i> <span class="mobile">Filter</span>
+						</li>
+					</ul>
 				</div>
 				<div class="collapse navbar-collapse">
 					<div class="navbar-form navbar-right" role="button">
 						<a href="https://goo.gl/HV6IYp" target="_blank" class="btn add-ngo">Add your NGO here</a>
 					</div>
+					<ul class="nav filter">
+						<li class="navbar-text">
+							<i class="fa fa-filter"></i> <span class="mobile">Filter</span>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<div id="map-canvas"></div>
 	<div id="filter-wrapper" class="container-fluid">
-		<div class="row" id="filter-selected">
+		<div class="row-fluid">
 			<div class="col-md-12">
-				<h2>Active filters</h2>
-				<i>Showing NGOs in the following fields</i>
+				<i class="showing-wrapper">Showing <span class="showing-count">0</span> NGO<span class="plural">s</span></i>
+			</div>
+		</div>
+		<div class="row-fluid hidden" id="filter-selected">
+			<div class="col-md-12">
+				<h3>Active filters</h3>
 				<div class="filter-output"></div>
 			</div>
 		</div>
-		<div class="row" id="filter-select">
+		<div class="row-fluid hidden" id="filter-select">
 			<div class="col-md-12">
-				<h2>Available filters</h2>
+				<h3>Not used filters</h3>
 				<div class="filter-output"></div>
 			</div>
 		</div>
 	</div>
 	<div id="tabletop-wrapper" class="container-fluid">
-		<div class="row" id="tabletop-output">
-			<div class="loading">Loading data ...</div>
+		<div class="row-fluid" id="tabletop-output">
+			<div class="loading">
+				<img src="img/loading.gif" alt="Loading NGO data ...">
+			</div>
 		</div>
 	</div>
 	<footer></footer>
@@ -64,14 +81,32 @@
 					<p>{Tagline}</p>
 				</div>
 				<div class="panel-footer">
-					<p class="class-Website {class-Website}"><i class="fa fa-fw fa-globe"></i> <a href="{Website}" target="_blank">Visit website</a></p>
-					<p class="class-Phone_Number {class-Phone_Number}"><i class="fa fa-fw fa-phone"></i> <a href="tel:{Phone Number}">{Phone Number}</a></p>
-					<p class="class-Email {class-Email}"><i class="fa fa-fw fa-envelope"></i> {Email}</p>
-					<p class="class-Link_to_facebook_page {class-Link_to_facebook_page}"><i class="fa fa-fw fa-facebook"></i> <a href="{Link to facebook page}" target="_blank">Facebook page</a></p>
-					<p class="class-Link_to_twitter_account {class-Link_to_twitter_account}"><i class="fa fa-fw fa-twitter"></i> <a href="{Link to twitter account}" target="_blank">Twitter feed</a></p>
-					<p class="class-Show_on_map {class-Show_on_map}"><i class="fa fa-fw fa-map-marker"></i> <a href="{Show on map}" data-index="{index}">Show on map</a></p>
-					<p class="class-Causes {class-Causes}">{Causes}</p>
 					<div class="selected-causes-count" data-count="{causes-count}"></div>
+					<div class="row">
+						<div class="col-xs-6">
+							<p class="class-Website {class-Website}"><i class="fa fa-fw fa-globe"></i> <a href="{Website}" target="_blank">Website</a></p>
+							<p class="class-Phone_Number {class-Phone_Number}"><i class="fa fa-fw fa-phone"></i> <a href="tel:{Phone Number}">{Phone Number}</a></p>
+						</div>
+						<div class="col-xs-6 text-right">
+							<p class="class-Link_to_facebook_page {class-Link_to_facebook_page}"><a href="{Link to facebook page}" target="_blank">Facebook</a> <i class="fa fa-fw fa-facebook"></i></p>
+							<p class="class-Link_to_twitter_account {class-Link_to_twitter_account}"><a href="{Link to twitter account}" target="_blank">Twitter</a> <i class="fa fa-fw fa-twitter"></i></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<p class="class-Email {class-Email}"><i class="fa fa-fw fa-envelope"></i> {Email}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<p class="class-Show_on_map {class-Show_on_map}"><i class="fa fa-fw fa-map-marker"></i> <a href="{Show on map}" data-index="{index}">Show on map</a></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<p class="class-Causes {class-Causes}">{Causes}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -93,6 +128,7 @@
 	<script type="text/javascript" src="js/vendor/headroom.js"></script>
 	<script type="text/javascript" src="js/map.js"></script>
 	<script type="text/javascript" src="js/tabletop.js"></script>
+	<script type="text/javascript" src="js/header.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
