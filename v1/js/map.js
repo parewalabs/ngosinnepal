@@ -1,8 +1,7 @@
 var map;
 function initMap(){
 	var $mapCanvas = $('#map-canvas');
-	var map_height = 400; // $(window).height() - $('.navbar').height();
-	$mapCanvas.height(map_height);
+	$mapCanvas.height(MAP_HEIGHT);
 
 	var osmTileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var basemap = L.tileLayer(osmTileUrl, {

@@ -1,0 +1,28 @@
+header .navbar{
+	margin-bottom: 0;
+}
+header .navbar-brand h1{
+	margin: 0;
+	font-family: "Crete Round", sans-serif;
+	font-size: 1.2em;
+}
+header .navbar-brand h1 .color {
+	color: #5cb85c;
+}
+header .add-ngo{
+	color: white;
+	background-color: #5cb85c;
+	padding: 6px 12px;
+}
+header .add-ngo:hover{
+	background-color: #ddd;
+}
+.headroom {
+	transition: transform 200ms linear;
+}
+.headroom--pinned {
+	transform: translateY(0%);
+}
+.headroom--unpinned {
+	transform: translateY(-100%);
+}

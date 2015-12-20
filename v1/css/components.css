@@ -2,17 +2,6 @@ body{
 	font-family: sans-serif;
 	padding-top: 51px;
 }
-header .navbar{
-	margin-bottom: 0;
-}
-header .add-ngo{
-	color: white;
-	background-color: #5cb85c;
-	padding: 6px 12px;
-}
-header .add-ngo:hover{
-	background-color: #ddd;
-}
 .template{
 	display: none;
 }

@@ -9,7 +9,8 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	var keys = Object.keys(tabletopData[0]);
 	var dataTemplate = $('#tpl-col').html();
 	var popupTemplate = $('#tpl-popup').html();
-	var $sink = $('#tabletop-output');
+	var $sinkTabletop = $('#tabletop-output');
+	var causes = [];
 	tabletopData.forEach(function (item, j){
 		// Data must be manually confirmed. If not confirmed, go on to next item.
 		if (typeof item["Confirmed"] === undefined || item["Confirmed"] === "") return;
@@ -24,15 +25,15 @@ function showInfo(tabletopData, tabletopInfo, next) {
 		}
 		
 		// Append html
-		var data = dataTemplate;
+		var dataHtml = dataTemplate;
 		var regexp, classField;
-		data = data.replace(new RegExp("{index}", "g"), j);
+		dataHtml = dataHtml.replace(new RegExp("{index}", "g"), j);
 		for (var i = keys.length - 1; i >= 0; i--) {
 			if (item[keys[i]] === ""){
 				// If data empty -> hide corresponding element by setting its class to 'hidden'
 				classField = keys[i].replace(/ /g, "_");
 				regexp = "{class-"+classField+"}";
-				data = data.replace(new RegExp(regexp, "g"), "hidden");
+				dataHtml = dataHtml.replace(new RegExp(regexp, "g"), "hidden");
 			} else {
 				regexp = "{"+keys[i]+"}";
 				var replaceBy = "";
@@ -43,19 +44,69 @@ function showInfo(tabletopData, tabletopInfo, next) {
 					items.forEach(function (item){
 						var str = item.trim();
 						if (str == "") return;
-						replaceBy = replaceBy + '<span class="cause">'+str.trim()+'</span>';
+						var cause = str.trim();
+						var cause_underscore = cause.replace(/ /g, '_');
+						causes.push(cause);
+						replaceBy = replaceBy + '<span class="cause" data-name="'+cause_underscore+'">'+cause+'</span>';
 					});
+					dataHtml = dataHtml.replace("{causes-count}", items.length);
 				}
-				data = data.replace(new RegExp(regexp, "g"), replaceBy);
+				dataHtml = dataHtml.replace(new RegExp(regexp, "g"), replaceBy);
 			}
 		};
-		$sink.append(data);
+		$sinkTabletop.append(dataHtml);
 	});
-
 	// Add click handler to show location
 	$('.class-Show_on_map').click(clicked_description_show_location);
 
+	/* FILTERING */
+	var $sinkFilterAvailable = $('#filter-select .filter-output');
+	var $sinkFilterSelected = $('#filter-selected .filter-output');
+	var filterTemplate = $('#tpl-filter').html();
+	var filterHtml = "";
+	// Return unique causes
+	causes = arrayUnique(causes);
+	causes.forEach(function (item){
+		var item_underscore = item.replace(/ /g, '_');
+		filterHtml = filterHtml + filterTemplate.replace(/{Name}/g, item).replace(/{Name_Underscore}/g, item_underscore);
+	});
+	$sinkFilterSelected.append(filterHtml);
+	$('.cause-clickable').click(clicked_filter);
+
 	next();
+}
+/**
+ * When the filter button is clicked:
+ * 1.	The button is moved from "active filters" to "disabled filters" or vice versa, depending on where the button is now.
+ * 2.	"Active filter"-count (the div of class selected-causes-count) is updated to show how many filters for this particular NGO are active right now.
+ * 		When that count reaches 0 (user clicks away all filters), all NGO panels with active filter count == 0 are hidden
+ * 		When the count instead changes from 0 to 1, affected panels are shown again.
+ */
+function clicked_filter(e){
+	var $target = $(e.target);
+	var name = $target.attr("data-name");
+	// Also, update active filters count for relevant NGO panels. When that count is 0, that NGO panel will get hidden.
+	if ($target.hasClass("selected")){
+		$target.detach().appendTo("#filter-select .filter-output");
+		$('.class-causes [data-name='+name+']').each(function (i, item){
+			var $element = $(item).parents(".panel-footer").children(".selected-causes-count");
+			var count = parseInt($element.attr("data-count"));
+			$element.attr("data-count", count - 1);
+		});
+	} else {
+		$target.detach().appendTo("#filter-selected .filter-output");
+		$('.class-causes [data-name='+name+']').each(function (i, item){
+			var $element = $(item).parents(".panel-footer").children(".selected-causes-count");
+			var count = parseInt($element.attr("data-count"));
+			$element.attr("data-count", count + 1);
+		});
+	}
+	// Hide an NGO panel if none of the NGO types are selected in the filters
+	$(".selected-causes-count[data-count=0]").parents(".ngo").hide();
+	// Show an NGO panel if any of the NGO types are selected in the filters
+	$(".selected-causes-count[data-count=1]").parents(".ngo").show();
+	// Toggle class for the clicked element
+	$target.toggleClass("selected");
 }
 /**
  * Handles click on "Show on map" link in NGO description.
@@ -83,3 +134,9 @@ function popup_opened(obj){
 		$("html, body").animate({ scrollTop: top }, 300);
 	});
 }
+function arrayUnique(a) {
+	return a.reduce(function (p, c) {
+		if (p.indexOf(c) < 0) p.push(c);
+		return p;
+	}, []);
+};
