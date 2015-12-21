@@ -3,7 +3,7 @@ header .navbar{
 }
 header .navbar .filter{
 	margin-left: 180px;
-	width: 70px;
+	width: 100px;
 }
 header .navbar .filter .navbar-text{
 	font-size: 1.2em;
