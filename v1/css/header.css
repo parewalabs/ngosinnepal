@@ -1,6 +1,10 @@
 header .navbar{
 	margin-bottom: 0;
 }
+header .navbar .filter{
+	margin-left: 180px;
+	width: 70px;
+}
 header .navbar .filter .navbar-text{
 	font-size: 1.2em;
 	color: #5cb85c;
