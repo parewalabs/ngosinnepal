@@ -74,6 +74,8 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	updateFilterView();
 	updateShownNgoNumber();
 
+	updateTotalNgoNumber(tabletopData.length);
+
 	next();
 }
 /**
@@ -125,6 +127,9 @@ function updateFilterView(){
 		$filterSelected.removeClass('hidden');
 	}
 }
+function updateTotalNgoNumber(total){
+	$('#filter-wrapper .showing-wrapper .total-count').text(total);
+}
 function updateShownNgoNumber(){
 	var numVisibleNgos = $('.ngo').length - $('.ngo.hidden').length - 1; // The 1 is the template
 	$('#filter-wrapper .showing-wrapper .showing-count').text(numVisibleNgos);
@@ -160,6 +165,11 @@ function popup_opened(obj){
 		$("html, body").animate({ scrollTop: top }, 300);
 	});
 }
+/**
+ * Returns unique array, helper function
+ * @param  {array} a Array with possibly duplicate values
+ * @return {array}   Array with no duplicate values
+ */
 function arrayUnique(a) {
 	return a.reduce(function (p, c) {
 		if (p.indexOf(c) < 0) p.push(c);

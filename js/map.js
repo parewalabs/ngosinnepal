@@ -11,7 +11,7 @@ function initMap(){
 	map = new L.map($mapCanvas[0], {
 		layers: [basemap]
 	});
-	map.setView([27.700769, 85.300140], 10); // Center over Kathmandu, with a certain zoom level
+	map.setView([27.700769, 85.300140], 8); // Center over Kathmandu, with a certain zoom level
 	
 	var clusterGroup = L.markerClusterGroup();
 	ngoMarkers.forEach(function (item){

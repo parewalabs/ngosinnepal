@@ -1,0 +1,16 @@
+footer{
+	border-top: 1px solid #aaa;
+}
+footer .breadcrumb{
+	margin-bottom: 0;
+	background-color: white;
+}
+footer .breadcrumb a{
+	color: #888;
+	text-decoration: underline;
+}
+footer .breadcrumb .active a{
+	color: #777;
+	font-weight: bold;
+	text-decoration: none;
+}

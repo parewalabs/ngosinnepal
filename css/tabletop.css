@@ -1,6 +1,9 @@
 #tabletop-wrapper{
 	background-color: #eee;
 }
+#tabletop-wrapper button.collapsing{
+	display: none;
+}
 #tabletop-wrapper .loading{
 	height: 80%;
 	display: none;

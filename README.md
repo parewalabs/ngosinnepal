@@ -1,5 +1,5 @@
 # NGOs in Nepal
-This website aims to crowdsource trusted, available NGOs in Nepal. All submissions are manually reviewed before going live.
+This website aims to crowdsource trusted, reputable and active NGOs in Nepal. All submissions are manually reviewed before going live.
 
 ## Tech side
 **Submissions** accepted using this public Google Form [https://goo.gl/HV6IYp](https://goo.gl/HV6IYp).
