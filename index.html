@@ -90,7 +90,10 @@
 	<div class="template" id="tpl-col">
 		<div class="col-sm-6 col-lg-4 ngo" id="ngo-{index}">
 			<div class="panel panel-default">
-				<div class="panel-heading">{Name}</div>
+				<div class="panel-heading">
+					<div class="logo" style="background:url('img/logos/{Name_Underscore}.jpg') no-repeat center center"></div>
+					{Name}
+				</div>
 				<div class="panel-body">
 					<p>{Tagline}</p>
 					<p class="collapse class-Full_Description_{index} {class-Full_Description}">{Full Description}</p>

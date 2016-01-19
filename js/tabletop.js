@@ -28,6 +28,8 @@ function showInfo(tabletopData, tabletopInfo, next) {
 		var dataHtml = dataTemplate;
 		var regexp, classField;
 		dataHtml = dataHtml.replace(new RegExp("{index}", "g"), j);
+		var name_underscore = item["Name"].replace(/ /g, '_');
+		dataHtml = dataHtml.replace(new RegExp("{Name_Underscore}", "g"), name_underscore);
 		for (var i = keys.length - 1; i >= 0; i--) {
 			if (item[keys[i]] === ""){
 				// If data empty -> hide corresponding element by setting its class to 'hidden'

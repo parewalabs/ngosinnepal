@@ -15,6 +15,14 @@
 #tabletop-wrapper .panel-heading{
 	font-weight: bold;
 }
+#tabletop-wrapper .panel-heading .logo{
+	float: right;
+	width: 80px;
+	height: 64px;
+	margin: -22px 0;
+	border-radius: 15px;
+	background-size: contain!important;
+}
 @media only screen and (min-width: 320px){
 	#tabletop-wrapper{
 		padding: 20px 0;
