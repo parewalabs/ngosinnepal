@@ -3,7 +3,10 @@ var NAVBAR_HEIGHT = $('header .navbar').height();
 var MAP_HEIGHT = 350;
 $(document).ready(function(){
 	// Get NGO data
-	initTabletop(initMap);
+	initTabletop(function(){
+		$('#tabletop-output').masonry({ itemSelector:'.ngo' });
+		initMap();
+	});
 
 	// Hide navigation on scroll
 	var myElement = document.querySelector("header nav");
