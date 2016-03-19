@@ -82,11 +82,12 @@ function showInfo(tabletopData, tabletopInfo, next) {
 }
 /**
  * When the filter button is clicked:
- * 1.	The button is moved from "active filters" to "disabled filters" or vice versa, depending on where the button is now.
- * 2.	"Active filter"-count (the div of class selected-causes-count) is updated to show how many filters for this particular NGO are active right now.
+ * 1. The button is moved from "active filters" to "disabled filters" or vice versa, depending on where the button is now.
+ * 2. "Active filter"-count (the div of class selected-causes-count) is updated to show how many filters for this particular NGO are active right now.
  * 		When that count reaches 0 (user clicks away all filters), all NGO panels with active filter count == 0 are hidden
  * 		When the count instead changes from 0 to 1, affected panels are shown again.
  * 3. Update number of currently shown NGOs
+ * 4. Reflow elements (Masonry)
  */
 function clicked_filter(e){
 	var $target = $(e.target);
@@ -114,6 +115,9 @@ function clicked_filter(e){
 
 	// Toggle class for the clicked element
 	$target.toggleClass("selected");
+
+	// Reflow elements
+	$('#tabletop-output').masonry({ itemSelector:'.ngo' });
 }
 function updateFilterView(){
 	var $filterSelect = $('#filter-select');
