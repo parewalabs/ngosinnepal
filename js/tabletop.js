@@ -5,6 +5,9 @@ function initTabletop(next){
 		simpleSheet: true
 	});
 }
+/**
+ * Data has been fetched from database, now display it.
+ */
 function showInfo(tabletopData, tabletopInfo, next) {
 	var keys = Object.keys(tabletopData[0]);
 	var dataTemplate = $('#tpl-col').html();
@@ -60,8 +63,12 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	});
 	// Add click handler to show location
 	$('.class-Show_on_map').click(clicked_description_show_location);
+	// Add click handler to reflow elements on expand/collapse content
+	$('.ngo .panel-body button').click(function(){
+		$('#tabletop-output').masonry({ itemSelector:'.ngo' });
+	});
 
-	/* FILTERING */
+	/* FILTERING BEGIN */
 	var filterTemplate = $('#tpl-filter').html();
 	var filterHtml = "";
 	// Return unique causes
@@ -72,12 +79,11 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	});
 	$('#filter-selected .filter-output').append(filterHtml);
 	$('.cause-clickable').click(clicked_filter);
-
 	updateFilterView();
+	/* FILTERING END */
+
 	updateShownNgoNumber();
-
 	updateTotalNgoNumber(tabletopData.length);
-
 	next();
 }
 /**
@@ -119,6 +125,11 @@ function clicked_filter(e){
 	// Reflow elements
 	$('#tabletop-output').masonry({ itemSelector:'.ngo' });
 }
+/**
+ * The filter consists of two categories, one for shown NGOs and one for hidden NGOs.
+ * During filtering, one category can turn empty and should then be hidden.
+ * This function checks whether a category should be hidden and hides/shows it.
+ */
 function updateFilterView(){
 	var $filterSelect = $('#filter-select');
 	var $filterSelected = $('#filter-selected');
