@@ -63,10 +63,6 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	});
 	// Add click handler to show location
 	$('.class-Show_on_map').click(clicked_description_show_location);
-	// Add click handler to reflow elements on expand/collapse content
-	$('.ngo .panel-body button').click(function(){
-		$('#tabletop-output').masonry({ itemSelector:'.ngo' });
-	});
 
 	/* FILTERING BEGIN */
 	var filterTemplate = $('#tpl-filter').html();
