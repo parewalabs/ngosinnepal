@@ -14,14 +14,15 @@ function showInfo(tabletopData, tabletopInfo, next) {
 	var popupTemplate = $('#tpl-popup').html();
 	var $sinkTabletop = $('#tabletop-output');
 	var causes = [];
+	var itemsAmount = tabletopData.length;
 	tabletopData.forEach(function (item, j){
 		// Data must be manually confirmed. If not confirmed, go on to next item.
 		if (typeof item["Confirmed"] === undefined || item["Confirmed"] === "") return;
 
 		// Create map markers. They will be appended to the map later.
 		var popupHtml = popupTemplate;
-		popupHtml = popupHtml.replace(new RegExp("{Name}", "g"), item["Name"]);
-		popupHtml = popupHtml.replace(new RegExp("{index}", "g"), j);
+		popupHtml = popupHtml.replace(/{Name}/g, item["Name"]);
+		popupHtml = popupHtml.replace(/{index}/g, j);
 		if (typeof item["Latitude"] !== undefined && typeof item["Longitude"] !== undefined){
 			ngoMarkers[j] = L.marker([item["Latitude"], item["Longitude"]]).bindPopup(popupHtml);
 			ngoMarkers[j].on("popupopen", popup_opened);
@@ -30,9 +31,10 @@ function showInfo(tabletopData, tabletopInfo, next) {
 		// Append html
 		var dataHtml = dataTemplate;
 		var regexp, classField;
-		dataHtml = dataHtml.replace(new RegExp("{index}", "g"), j);
+		dataHtml = dataHtml.replace(/{index}/g, j);
+		dataHtml = dataHtml.replace(/{inverse-index}/g, itemsAmount - j);
 		var name_underscore = item["Name"].replace(/ /g, '_');
-		dataHtml = dataHtml.replace(new RegExp("{Name_Underscore}", "g"), name_underscore);
+		dataHtml = dataHtml.replace(/{Name_Underscore}/g, name_underscore);
 		for (var i = keys.length - 1; i >= 0; i--) {
 			if (item[keys[i]] === ""){
 				// If data empty -> hide corresponding element by setting its class to 'hidden'
